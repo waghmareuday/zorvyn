@@ -334,7 +334,7 @@ export default function TransactionsView() {
         {/* Data Table */}
         <div className="glass-panel rounded-3xl overflow-hidden flex flex-col">
           {/* Table Header */}
-          <div className="grid grid-cols-[1fr_2fr_1.5fr_1fr_1fr] lg:grid-cols-[1fr_3fr_1.5fr_1fr_1fr_100px] gap-4 px-8 py-5 border-b border-white/5 bg-white/5 font-inter text-[13px] font-semibold tracking-wider text-slate-400 uppercase">
+          <div className="hidden md:grid grid-cols-[1fr_2fr_1.5fr_1fr_1fr] lg:grid-cols-[1fr_3fr_1.5fr_1fr_1fr_100px] gap-4 px-8 py-5 border-b border-white/5 bg-white/5 font-inter text-[13px] font-semibold tracking-wider text-slate-400 uppercase">
             <button onClick={() => sort('date')} className="flex items-center gap-2 hover:text-white transition-colors text-left">
               Date & Time
             </button>
@@ -369,10 +369,44 @@ export default function TransactionsView() {
                 const color = categoryColor(t.category)
 
                 return (
-                  <div
-                    key={t.id}
-                    className="group grid grid-cols-[1fr_2fr_1.5fr_1fr_1fr] lg:grid-cols-[1fr_3fr_1.5fr_1fr_1fr_100px] gap-4 px-8 py-6 items-center border-b border-white/5 hover:bg-white-[0.02] hover:bg-[#ffffff05] transition-colors min-w-0"
-                  >
+                  <div key={t.id}>
+                    {/* Mobile Card Layout */}
+                    <div className="md:hidden flex flex-col gap-4 px-5 py-5 border-b border-white/5 hover:bg-white/5 transition-colors">
+                      <div className="flex justify-between items-start">
+                        <div className="flex items-center gap-4 min-w-0">
+                          <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${color}1A` }}>
+                            <Icon size={18} style={{ color }} />
+                          </div>
+                          <div className="min-w-0">
+                            <p className="font-inter text-base font-semibold text-white truncate">{t.description}</p>
+                            <p className="font-inter text-xs text-slate-400 mt-1 truncate">{t.account}</p>
+                          </div>
+                        </div>
+                        <span className={`font-manrope text-lg font-bold flex-shrink-0 pl-3 ${credit ? 'text-emerald-400' : 'text-white'}`}>
+                          {credit ? '+' : '−'}{inr(t.amount)}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between gap-3 ml-14">
+                        <div className="flex items-center gap-2">
+                          <CatBadge cat={t.category} />
+                          <span className={`px-2 py-1.5 rounded-md font-inter text-[10px] font-semibold uppercase tracking-wider ${credit ? 'bg-emerald-500/10 text-emerald-400' : 'bg-rose-500/10 text-rose-400'}`}>
+                            {t.type}
+                          </span>
+                        </div>
+                        <p className="text-xs font-medium text-slate-400">
+                          {new Date(t.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
+                        </p>
+                      </div>
+                      {isAdmin && (
+                        <div className="flex items-center justify-end gap-2 mt-2 pt-3 border-t border-white/5">
+                          <button onClick={() => setModal(t)} className="px-4 py-2 rounded-xl bg-white/5 text-slate-300 hover:text-blue-400 hover:bg-blue-500/10 text-xs font-semibold transition-colors">Edit</button>
+                          <button onClick={() => deleteTransaction(t.id)} className="px-4 py-2 rounded-xl bg-white/5 text-slate-300 hover:text-rose-400 hover:bg-rose-500/10 text-xs font-semibold transition-colors">Delete</button>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Desktop Grid Layout */}
+                    <div className="hidden md:grid group grid-cols-[1fr_2fr_1.5fr_1fr_1fr] lg:grid-cols-[1fr_3fr_1.5fr_1fr_1fr_100px] gap-4 px-8 py-6 items-center border-b border-white/5 hover:bg-white-[0.02] hover:bg-[#ffffff05] transition-colors min-w-0">
                     {/* Date */}
                     <div className="font-inter min-w-0 pr-2">
                       <p className="text-sm font-medium text-white whitespace-nowrap">
@@ -430,6 +464,7 @@ export default function TransactionsView() {
                         </button>
                       </div>
                     )}
+                  </div>
                   </div>
                 )
               })

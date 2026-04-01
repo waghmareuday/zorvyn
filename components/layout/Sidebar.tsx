@@ -26,7 +26,7 @@ export default function Sidebar({ onClose }: { onClose: () => void }) {
 
   return (
     <aside
-      className="flex flex-col h-screen flex-shrink-0 glass-panel border-y-0 border-l-0 bg-[#020617]/90"
+      className="flex flex-col h-[100dvh] flex-shrink-0 glass-panel border-y-0 border-l-0 bg-[#020617]/90"
       style={{ width: 260 }}
     >
       {/* Brand */}

@@ -162,8 +162,10 @@ export default function DashboardContent() {
             <span className="font-inter text-sm font-semibold text-emerald-400">+69.2% All-time</span>
           </div>
         </div>
-        <div className="h-[280px]">
-          <BalanceTrendChart height={280} />
+        <div className="h-[280px] overflow-x-auto pb-4">
+          <div className="min-w-[500px] h-full pr-4">
+            <BalanceTrendChart height={280} />
+          </div>
         </div>
       </motion.div>
 

@@ -14,7 +14,7 @@ export default function DashboardShell({ children, title }: Props) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <div className="flex h-screen overflow-hidden bg-transparent">
+    <div className="flex h-[100dvh] overflow-hidden bg-transparent">
       {/* Desktop Sidebar */}
       <div className="hidden lg:flex">
         <Sidebar onClose={() => {}} />

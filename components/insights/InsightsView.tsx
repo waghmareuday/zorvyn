@@ -196,8 +196,9 @@ export default function InsightsView() {
           </div>
         </div>
         
-        <div className="w-full" style={{ height: 350 }}>
-          <ResponsiveContainer width="100%" height="100%">
+        <div className="w-full overflow-x-auto pb-4" style={{ height: 350 }}>
+          <div className="min-w-[600px] h-full pr-4">
+            <ResponsiveContainer width="100%" height="100%">
             <BarChart data={barData} margin={{ top: 20, right: 20, left: 0, bottom: 20 }} barGap={8}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
               <XAxis dataKey="cat" tick={{ fill: '#cdd5e0', fontSize: 13, fontFamily: 'Inter' }} axisLine={false} tickLine={false} dy={16} />
@@ -207,6 +208,7 @@ export default function InsightsView() {
               <Bar dataKey="Feb" fill="rgba(59,130,246,0.3)" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
+          </div>
         </div>
       </motion.div>
 
